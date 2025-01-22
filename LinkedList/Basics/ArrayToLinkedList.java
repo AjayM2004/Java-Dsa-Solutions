@@ -27,17 +27,30 @@ public class ArrayToLinkedList {
 	      }
 	      return head;
 	}
+	static int linkedListLength(Node head)
+	{
+		Node temp=head;
+		int count=0;
+		while(temp!=null)
+		{
+			temp = temp.next;
+			count++;
+		}
+		return count;
+	}
     public static void main(String[] args) {
 		int[] arr = {100,200,300,400,500,600};
 		Node head = createLinkedList(arr);
 		Node temp = head;
-		System.out.println("Traversing LinkedList");
 		System.out.println("**********");
+        System.out.println("----Traversing the linkedList elements----");
 		while(temp != null)
 		{
 		    System.out.println(temp.data);
 		    temp = temp.next;
 		}
-		System.out.println("**********");
+		System.out.println("***********");
+		int len = linkedListLength(head);
+		System.out.println("Length="+len);
 	}
 }
