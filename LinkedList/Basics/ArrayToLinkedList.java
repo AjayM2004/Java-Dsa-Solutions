@@ -27,6 +27,18 @@ public class ArrayToLinkedList {
 	      }
 	      return head;
 	}
+	static boolean searchElement(Node head,int value)
+	{
+		Node temp = head;
+		while(temp!=null)
+		{   if(temp.data == value)
+		    {
+			    return true;
+		    }
+			temp = temp.next;
+		}
+		return false;
+	}
 	static int linkedListLength(Node head)
 	{
 		Node temp=head;
@@ -52,5 +64,7 @@ public class ArrayToLinkedList {
 		System.out.println("***********");
 		int len = linkedListLength(head);
 		System.out.println("Length="+len);
+		System.out.println(searchElement(head,100));
+		System.out.println(searchElement(head,1000));
 	}
 }
