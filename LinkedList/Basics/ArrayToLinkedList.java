@@ -31,6 +31,7 @@ public class ArrayToLinkedList {
 		int[] arr = {100,200,300,400,500,600};
 		Node head = createLinkedList(arr);
 		Node temp = head;
+		System.out.println("Traversing LinkedList");
 		System.out.println("**********");
 		while(temp != null)
 		{
