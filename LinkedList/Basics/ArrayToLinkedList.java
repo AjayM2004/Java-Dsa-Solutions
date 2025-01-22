@@ -50,21 +50,51 @@ public class ArrayToLinkedList {
 		}
 		return count;
 	}
+	static Node removeHead(Node head)
+	{   
+		if(head==null)
+		{
+			return head;
+		}
+		head = head.next;
+		return head;
+	}
+	static Node removeTail(Node head)
+	{
+		Node temp = head;
+		while(temp.next.next!=null)
+		{
+			temp = temp.next;
+		}
+		temp.next = null;
+		return head;
+	}
+	static void traverseLinkedList(Node head)
+	{
+		Node temp = head;
+		while(temp!=null)
+		{
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+	}
     public static void main(String[] args) {
 		int[] arr = {100,200,300,400,500,600};
 		Node head = createLinkedList(arr);
-		Node temp = head;
-		System.out.println("**********");
-        System.out.println("----Traversing the linkedList elements----");
-		while(temp != null)
-		{
-		    System.out.println(temp.data);
-		    temp = temp.next;
-		}
-		System.out.println("***********");
 		int len = linkedListLength(head);
 		System.out.println("Length="+len);
 		System.out.println(searchElement(head,100));
 		System.out.println(searchElement(head,1000));
+		System.out.println("Before removing head");
+		traverseLinkedList(head);
+		head=removeHead(head);
+		System.out.println("After removing head");
+		traverseLinkedList(head);
+		System.out.println("Before removing last element...");
+		traverseLinkedList(head);
+		head=removeTail(head);
+		System.out.println("After removing last element...");
+		traverseLinkedList(head);
+		
 	}
 }
