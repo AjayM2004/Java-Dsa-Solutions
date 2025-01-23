@@ -78,6 +78,104 @@ public class ArrayToLinkedList {
 			temp = temp.next;
 		}
 	}
+	static Node deleteK(Node head,int k)
+	{
+		Node temp = head;
+		Node prev = null;
+		if(head==null)
+		{
+			return head;
+		}
+		if(k==1)
+		{
+			head = head.next;
+			return head;
+		}
+		int count=0;
+		while(temp!=null && count<k)
+		{
+			count++;
+			if(count==k)
+			{
+				prev.next = prev.next.next;
+				return head;
+			}
+			prev = temp;
+			temp=temp.next;
+		}
+		
+		System.out.println("You entered very high value");
+		return head;
+	}
+	static Node insertStart(int data,Node head)
+	{
+		return new Node(data,head);
+	}
+	static Node insertTail(int data,Node head)
+	{
+		Node temp = head;
+		while(temp.next != null)
+		{
+			temp = temp.next;
+		}
+		temp.next = new Node(data);
+		return head;
+	}
+	static Node insertK(Node head,int element,int k)
+	{   
+		Node temp = head;
+		if(head==null)
+		{
+			if(k==1)
+			{
+				return new Node(element,head);
+			}
+			else {
+				return null;
+			}
+		}
+		if(k==1)
+		{
+			return new Node(element,temp);
+		}
+		int cnt=0;
+		while(temp!=null)
+		{
+			cnt++;
+			if(cnt==(k-1))
+			{
+			    Node node = new Node(element,temp.next);   
+			    temp.next = node;
+			    break;
+			}
+			temp=temp.next;
+		}
+		return head;
+	}
+	static Node insertValueBefore(Node head,int element,int val)
+	{   
+		Node temp = head;
+		if(head==null)
+		{
+			System.out.println("Value not found");
+			return null;
+		}
+		if(temp.data == val)
+		{
+			return new Node(element,temp);
+		}
+		while(temp!=null)
+		{
+			if(temp.next.data==val)
+			{
+			    Node node = new Node(element,temp.next);   
+			    temp.next = node;
+			    break;
+			}
+			temp=temp.next;
+		}
+		return head;
+	}
     public static void main(String[] args) {
 		int[] arr = {100,200,300,400,500,600};
 		Node head = createLinkedList(arr);
@@ -95,6 +193,20 @@ public class ArrayToLinkedList {
 		head=removeTail(head);
 		System.out.println("After removing last element...");
 		traverseLinkedList(head);
-		
+		head=deleteK(head,1);
+		System.out.println("************");
+		traverseLinkedList(head);
+		head = insertStart(1000,head);
+		System.out.println("************");
+		traverseLinkedList(head);
+		head = insertTail(7000,head);
+		System.out.println("************");
+		traverseLinkedList(head);
+		head = insertK(head,-1000,6);
+		System.out.println("************");
+		traverseLinkedList(head);
+		head = insertValueBefore(head,9000,7000);
+		System.out.println("************");
+		traverseLinkedList(head);
 	}
 }
