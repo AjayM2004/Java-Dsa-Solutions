@@ -113,7 +113,62 @@ public class DoublyLinkedlist {
 	    	temp.back =null;
 	    	return head;
 	    }
-	    
+	    static Node insertionAtBeginning(Node head,int val)
+	    {
+	    	Node newnode = new Node(val);
+	    	if(head==null)
+	    	{
+	    		return newnode;
+	    	}
+	    	head.back = newnode;
+	    	newnode.next = head;
+	    	head = newnode;
+	    	return head;
+	    }
+	    static Node insertionBeforeEnd(Node head,int val)
+	    {
+	    	if(head.next==null)
+	    	{
+	    		return insertionAtBeginning(head,val);
+	    	}
+	    	Node tail = head;
+	    	while(tail.next!=null)
+	    	{
+	    		tail = tail.next;
+	    	}
+	    	Node prev = tail.back;
+	        Node newnode = new Node(val,tail,prev);
+	        prev.next = newnode;
+	        tail.back = newnode;
+	        return head;
+	    }
+	    static Node insertionBeforeKthNode(Node head,int val,int k)
+	    {
+	    	if(k==1)
+	    	{
+	    		return insertionAtBeginning(head,val);
+	    	}
+	    	if(k==count(head))
+	    	{
+	    		return insertionBeforeEnd(head,val);
+	    	}
+	    	int cnt= 0;
+	    	Node temp = head;
+	    	while(temp!=null)
+	    	{
+	    		cnt++;
+	    		if(cnt==k)
+	    		{
+	    			break;
+	    		}
+	    		temp = temp.next;
+	    	}
+	    	Node prev = temp.back;
+	        Node newnode = new Node(val,temp,prev);
+	        prev.next = newnode;
+	        temp.back = newnode;
+	        return head;
+	    }
         public static void main(String[] args) {
 			int[] arr = {11,12,13,14,15,100,200};
 			Node head = createLinkedList(arr);
@@ -125,5 +180,12 @@ public class DoublyLinkedlist {
 			System.out.println("Length of the linked list=>"+count(head));
 			head = removeKthElement(head,3);
 			print(head,"After deletion of kth element");
+			head = insertionAtBeginning(head,5);
+			print(head,"After insertion at the beginning");
+			head = insertionBeforeEnd(head,10000);
+			print(head,"After insertion before the end");
+			head = insertionBeforeKthNode(head,-100,3);
+			print(head,"After insertion before the k");
 		}
 }
+
