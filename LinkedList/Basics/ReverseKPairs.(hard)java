@@ -1,0 +1,68 @@
+class Solution {
+    static Node findKthNode(Node head,int k)
+    {
+        Node temp = head;
+        for(int i=0;i<k-1 && temp!=null;i++)
+        {
+            temp = temp.next;
+        }
+        return temp;
+    }
+    static Node reverse(Node head)
+    {
+        Node temp = head;
+        Node prev = null;
+        Node front = null;
+        while(temp!=null)
+        {
+            front = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = front;
+        }
+        return prev;
+    }
+    static Node getLastNode(Node head)
+    {
+        Node temp = head;
+        while(temp.next!=null)
+        {
+            temp = temp.next;
+        }
+        return temp;
+    }
+    public static Node reverseKGroup(Node head, int k) {
+        Node temp = head;
+        Node prevLast = null;
+        Node nextNode = null;
+        Node kthNode = null;
+        while(temp!=null)
+        {
+            kthNode = findKthNode(temp,k);
+            if(kthNode==null)
+            {
+            // Reverse the remaining nodes even if they are fewer than k
+                kthNode = getLastNode(temp);  // Helper to get last node
+                nextNode = null;
+            }
+            else
+            {
+                nextNode = kthNode.next;
+                kthNode.next = null;
+            }
+                kthNode = reverse(temp);
+                if(temp==head)
+                {
+                    head = kthNode;
+                }
+                else{
+                    prevLast.next = kthNode;
+                }
+                prevLast = temp;
+                temp = nextNode;
+            }
+             return head;
+        }
+       
+    
+}
